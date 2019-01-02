@@ -7,9 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		Converter c = new Converter();
 		File file = new File("Font");
-//       System.out.println(c.loadFromFont(file));
 		c.getWord(file, "prog");
-//		c.createLetter(file);
 	}
 
 }

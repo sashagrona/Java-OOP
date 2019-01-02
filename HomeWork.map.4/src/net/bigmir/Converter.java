@@ -32,17 +32,20 @@ public class Converter {
 	public void createLetter(File file) {
 		Converter c = new Converter();
 		String text = c.loadFromFont(file);
-		String[] let =null;
+		String[] let =text.split(System.lineSeparator());
 		int i = 1;
 		int k = 1;
 		int height = 8;
         
 		for (char a = 'a'; a <= 'z'; a++) {
+			StringBuilder sb = new StringBuilder();
 			for (i = k; i < height; i++) {	
-				 let = text.split(System.lineSeparator());
+				 sb.append(let[i]);
+				 if(i<height ) {
+				 sb.append(System.lineSeparator());
+				 }
 			}
-			map.put(a, let.toString());
-			
+			map.put(a, sb.toString());	
 			k += 8;
 			height += 8;
 		}
@@ -52,15 +55,15 @@ public class Converter {
 	public void getWord(File file, String text){
 		createLetter(file);
 		char [] letters = text.toCharArray();
+		StringBuilder sb = new StringBuilder();
 		Set<Map.Entry<Character, String >> set = map.entrySet();
 		for (char c : letters) {
 			for(Map.Entry<Character, String > s : set) {
 				if(s.getKey().equals(c)) {
-					System.out.print(s.getValue().toString());
-					System.out.print(" ");
+					sb.append(s.getValue());
 				}
+				
 			}
-		}
+		}System.out.println(sb.toString());
 	}
-
 }

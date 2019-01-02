@@ -8,7 +8,8 @@ public class Main {
 		Converter c = new Converter();
 		File file = new File("Font");
 //       System.out.println(c.loadFromFont(file));
-c.getWord(file, "hello");
+		c.getWord(file, "prog");
+//		c.createLetter(file);
 	}
 
 }

@@ -1,18 +1,23 @@
 package net.bigmir;
 
+import java.util.Arrays;
+
 public class ShellSort implements Runnable {
 	private int step;
 	private int[] arr;
-	private int quantity;
-	private int d;
-	private int l;
+	private int d = 2;
+	private int l = 1;
+	private int begin;
+	private int end;
+	private int quantity = 1;
+	private int n;
 
-	public ShellSort(int[] arr, int quantity, int d, int l) {
+	public ShellSort(int[] arr, int begin, int end, int n) {
 		super();
 		this.arr = arr;
-		this.quantity = quantity;
-		this.d = d;
-		this.l = l;
+		this.begin = begin;
+		this.end = end;
+		this.n = n;
 	}
 
 	public ShellSort() {
@@ -21,31 +26,41 @@ public class ShellSort implements Runnable {
 
 	@Override
 	public void run() {
+		
 		step = arr.length / 2;
 		int temp = 0;
-		if (quantity == 1) {
-			for (int i = 0; i < step; i++) {
-				if (arr[i] > arr[i + step]) {
-					temp = arr[i];
-					arr[i] = arr[i + step];
-					arr[i + step] = temp;
-				}
+//		if (quantity == 1) {
+			for (begin = n; begin < end+1+n; begin++) {
+				if (arr[begin] > arr[begin + end]) {
+					temp = arr[begin];
+					arr[begin] = arr[begin + end];
+					arr[begin + end] = temp;
+//				}
 			}
 		}
 		int j = 0;
-
-		for (int i = 0; i < step * l - 1; i++) {
-			temp = arr[j];
-			if (arr[i] > arr[i + step / d]) {
-				temp = arr[i + step / d];
-				arr[i + step / d] = arr[i];
-				j = i;
+		while (quantity-1  < 2) {
+			for (int begin = n; begin < step * l - 1; begin++) {
+				temp = arr[j];
+				if (arr[begin] > arr[begin + end / d]) {
+					temp = arr[begin + end / d];
+					arr[begin + end / d] = arr[begin];
+					j = begin;
+				}
+				while (j > 0 && temp < arr[j - 1]) {
+					arr[j] = arr[j - 1];
+					j--;
+				}
+				arr[j] = temp;
+				
+				
 			}
-			while (j > 0 && temp < arr[j - 1]) {
-				arr[j] = arr[j - 1];
-				j--;
+			d *= 2;
+			if (l * end < arr.length) {
+				l += 1;
 			}
-			arr[j] = temp;
+			quantity++;
 		}
+//		System.out.println(Arrays.toString(arr));
 	}
 }

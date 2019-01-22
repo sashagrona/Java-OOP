@@ -6,7 +6,7 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) {
-		int range = 200;
+		int range = 10;
 		Random rn = new Random();
 		
 		int[] arr = new int[range];
@@ -16,6 +16,9 @@ public class Main {
 		System.out.println("Unsorted: " + Arrays.toString(arr));
 		ThreadsSort ts = new ThreadsSort();
 		ts.sort(arr);
+//		ShellSort ss = new ShellSort(arr);
+//		Thread t = new Thread(ss);
+//		t.start();
 
 	}
 

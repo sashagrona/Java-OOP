@@ -1,42 +1,28 @@
 package net.bigmir;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ThreadsSort {
-
+private int threads = 0;
 	public ThreadsSort() {
 		super();
 	}
 
+	public int getThreads() {
+		return threads;
+	}
 	public void sort(int[] arr) {
 		int quantity = 1;
 		int step = arr.length / 2;
-		int l = 1;
-		int d = 2;
-		int threads = 0;
 		int count = arr.length;
-		while(count > 1) {
-			count/=2;
-			threads ++;
-		}
-		threads-=1;
-		System.out.println("Quantity of threads " + threads);
-		ShellSort[] ss = new ShellSort[threads];
-		Thread[] thread = new Thread[threads];
-		for (int i = 0; i < thread.length; i++) {
-			ss[i] = new ShellSort(arr, quantity, d, l);
-			thread[i] = new Thread(ss[i]);
-			thread[i].start();
-			try {
-				thread[i].join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			quantity++;
-			d *= 2;
-			if(l*step < arr.length) {
-			l += 1;
-			}
+		int begin = 0;
+		ExecutorService ex = Executors.newFixedThreadPool(2);
+		for(int n = 0;n<step;n++) {
+			ex.execute(new ShellSort(arr, begin, step,n));
+			
 		}
 		System.out.println(Arrays.toString(arr));
 	}

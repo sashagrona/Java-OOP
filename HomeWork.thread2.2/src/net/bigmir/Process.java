@@ -15,7 +15,7 @@ public class Process implements Runnable {
 	@Override
 	public void run() {
 		synchronized (this) {
-				c.progressScreen();	
+		      c.progressScreen();	
 		}
 	}
 

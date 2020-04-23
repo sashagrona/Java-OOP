@@ -89,8 +89,6 @@ public class Group implements Voenkom, Serializable {
 		Student b;
 		for (int i = 0; i < groupOf.length - k; i++) {
 			if (groupOf[i] != null && groupOf[i].getStudID().equalsIgnoreCase(studID)) {
-				// groupOf[i] = groupOf[groupOf.length - 1 - k];
-				// groupOf[groupOf.length - 1 - k] = null;
 				b = groupOf[i];
 				groupOf[i] = null;
 				line = "You have removed from the group " + b.getName() + " " + b.getSurname();
